@@ -1,16 +1,18 @@
 Package: samp
-Title: What the Package Does (One Line, Title Case)
+Title: A Shiny app to explore sampling distributions
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Tomas",
+           family = "Capretto",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "tomicapretto@gmail.com")
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
+Imports: 
+    shiny (>= 1.5.0),
+    shiny.semantic (>= 0.4.0),
+    shinyjs (>= 2.0.0)
