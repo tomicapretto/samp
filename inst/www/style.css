@@ -32,3 +32,11 @@
     color: #e74c3c;
 }
 
+.ui.slider .inner .track-fill {
+  background-color: #34495e;
+}
+
+.ui.slider .inner .thumb {
+    height: 1.25em;
+    width: 1.25em;
+}

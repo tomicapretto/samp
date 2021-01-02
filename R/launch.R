@@ -1,6 +1,6 @@
 #' Launch app
 #'
-#' @importFrom shiny tags
+#' @importFrom shiny tags observeEvent insertUI removeUI
 #' @export
 
 launch = function() {
