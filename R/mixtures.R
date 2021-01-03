@@ -36,14 +36,14 @@ Mixture = R6::R6Class(
       # but it could be any list-like object that can be subsetable by
       # object[["name"]]
       if (type == "rvs") {
-        return(self$mixture_rvs(self$get_params(param_list), size))
-      } else {
-        return(self$mixture_pdf(self$get_params(param_list), size))
+        return(self$mixture_rvs(param_list, size))
+      } else if (type == "pdf") {
+        return(self$mixture_pdf(param_list))
       }
     },
 
     get_params = function(param_list) {
-      lapply(self$components, function(x) {
+     lapply(self$components, function(x) {
         param_names = paste0("dist_", x$id, "_param_", 1:2)
         lapply(param_names, function(x) param_list[[x]])
       })
@@ -53,10 +53,23 @@ Mixture = R6::R6Class(
       vapply(self$components, function(x) x$dist, character(1))
     },
 
-    mixture_rvs = function(param_list, size, wts = NULL) {
-      if (is.null(wts)) {
-        wts = rep(1 / self$count(), self$count())
+    get_weights = function(param_list) {
+      wts = vapply(
+        self$components,
+        function(x) {
+          param_list[[paste0("weight_", x$id)]]
+        },
+        numeric(1)
+      )
+      if (sum(wts) >= 0.99 && sum(wts) <= 1.01) {
+        return(wts)
+      } else {
+        stop2("Weights must add up to 1.")
       }
+    },
+
+    mixture_rvs = function(param_list, size) {
+      wts = self$get_weights(param_list)
       .l = list(self$get_dists(), self$get_params(param_list), round(wts * size))
       unlist(purrr::pmap(.l, self$component_rvs), use.names = FALSE)
     },
@@ -67,11 +80,8 @@ Mixture = R6::R6Class(
       do.call(.f, .args)
     },
 
-    mixture_pdf = function(param_list, wts = NULL) {
-      if (is.null(wts)) {
-        wts = rep(1 / self$count(), self$count())
-      }
-
+    mixture_pdf = function(param_list) {
+      wts = self$get_weights(param_list)
       dists = self$get_dists()
       params = self$get_params(param_list)
 
@@ -102,10 +112,15 @@ Mixture = R6::R6Class(
     pdf_bounds = function(distribution, params) {
       .f = pdf_bounds_list[[distribution]]
       .f(params)
+    },
+
+    get_inputs = function() {
+      unlist(lapply(self$components, function(x) {
+        c(paste0("weight_", x$id), paste0("dist_", x$id, c("_param_1", "_param_2")))
+      }), use.names = FALSE)
     }
   )
 )
-
 
 pdf_bounds_list = list(
   "norm" = function(params) {

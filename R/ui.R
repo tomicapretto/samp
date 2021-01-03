@@ -50,15 +50,21 @@ body = function() {
     style = "margin-left: 260px",
     tags$div(
       class = "ui container",
-      tags$h1(class = "ui header", "First header")
+      tags$h1(class = "ui header", "First header"),
+      shiny::plotOutput("plot_rvs"),
+      shiny::plotOutput("plot_pdf")
     )
   )
 }
 
-
 ui = function() {
   shiny.semantic::semanticPage(
     shinyjs::useShinyjs(),
+    # Enable notifications
+    shinypop::use_notiflix_notify(
+      position = "right-bottom",
+      timeout = 5000
+    ),
     tags$head(shiny::includeCSS(samp_file("www", "style.css"))),
     sidebar(),
     body()

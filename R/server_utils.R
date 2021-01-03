@@ -5,7 +5,6 @@ add_distribution = function(distribution, id) {
   )
 }
 
-
 get_dist_header = function(distribution) {
   switch(distribution,
    "norm" = "Normal",
@@ -16,41 +15,6 @@ get_dist_header = function(distribution) {
    "unif" = "Uniform"
   )
 }
-
-get_param_names = function(distribution) {
- switch(distribution,
-     "norm" = c("\\mu", "\\sigma"),
-     "t" = c("\\nu", "\\mu"),
-     "gamma" = c("\\alpha", "\\beta"), # shape and rate
-     "beta" = c("\\alpha", "\\beta"),
-     "lnorm" = c("\\mu", "\\sigma"), # convert to log scale
-     "unif" = c("a", "b")
-  )
-}
-
-get_default_values = function(distribution) {
-  switch(distribution,
-   "norm" = c(0, 1),
-   "t" = c(5, 0),
-   "gamma" = ,
-   "beta" = c(2, 2),
-   "lnorm" = c(0, 1),
-   "unif" = c(-1, 1)
-  )
-}
-
-get_range = function(distribution) {
-  # TODO: Check values passed are acceptable
-  switch(distribution,
-    "norm" = list(c(NA, NA), c(0, NA)),
-     "t" = list(c(0, NA), c(NA, NA)),
-     "gamma" = ,
-     "beta" = list(c(0, NA), c(0, NA)),
-     "lnorm" = list(c(NA, NA), c(0, NA)),
-     "unif" = list(c(NA, NA), c(NA, NA))
-  )
-}
-
 
 distribution_params = function(distribution, id) {
 
@@ -118,5 +82,39 @@ distribution_params = function(distribution, id) {
         )
       )
     )
+  )
+}
+
+get_param_names = function(distribution) {
+  switch(distribution,
+         "norm" = c("\\mu", "\\sigma"),
+         "t" = c("\\nu", "\\mu"),
+         "gamma" = c("\\alpha", "\\beta"), # shape and rate
+         "beta" = c("\\alpha", "\\beta"),
+         "lnorm" = c("\\mu", "\\sigma"), # convert to log scale
+         "unif" = c("a", "b")
+  )
+}
+
+get_default_values = function(distribution) {
+  switch(distribution,
+         "norm" = c(0, 1),
+         "t" = c(5, 0),
+         "gamma" = ,
+         "beta" = c(2, 2),
+         "lnorm" = c(0, 1),
+         "unif" = c(-1, 1)
+  )
+}
+
+get_range = function(distribution) {
+  # TODO: Check values passed are acceptable
+  switch(distribution,
+         "norm" = list(c(NA, NA), c(0, NA)),
+         "t" = list(c(0, NA), c(NA, NA)),
+         "gamma" = ,
+         "beta" = list(c(0, NA), c(0, NA)),
+         "lnorm" = list(c(NA, NA), c(0, NA)),
+         "unif" = list(c(NA, NA), c(NA, NA))
   )
 }
