@@ -48,9 +48,9 @@ sidebar = function() {
 
 body = function() {
   tags$div(
-    style="margin-left: 260px",
+    style = "margin-left: 260px",
     tags$div(
-      class="ui container",
+      class = "ui container",
       tags$h1(class = "ui header", "First header")
     )
   )

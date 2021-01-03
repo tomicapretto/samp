@@ -37,12 +37,12 @@ distribution_params = function(id) {
       ),
       tags$div(
         class = "row",
-        style = "margin-top: -15px;",
+        style = "margin-top: -20px;",
         tags$div(
           class = "eight wide column",
           shiny.semantic::numericInput(
             inputId = paste0("dist_", id, "_param_1"),
-            label = "Param 1",
+            label = katexR::katex("\\alpha"),
             value = 5,
             step = 0.1,
             width = "100%"
@@ -52,7 +52,7 @@ distribution_params = function(id) {
           class = "eight wide column",
           shiny.semantic::numericInput(
             inputId = paste0("dist_", id, "_param_2"),
-            label = "Param 2",
+            label = katexR::katex("\\beta"),
             value = 2,
             step = 0.1,
             width = "100%"
