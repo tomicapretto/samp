@@ -27,7 +27,6 @@ sidebar = function() {
                 "Gamma" = "gamma",
                 "Beta" = "beta",
                 "Log-normal" = "lnorm",
-                "Weibull" = "weibull",
                 "Uniform" = "unif"
               )
             )
