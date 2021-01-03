@@ -50,7 +50,6 @@ body = function() {
   tags$div(
     style="margin-left: 260px",
     tags$div(
-      id = "examples",
       class="ui container",
       tags$h1(class = "ui header", "First header")
     )

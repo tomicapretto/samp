@@ -15,4 +15,6 @@ RoxygenNote: 7.1.0
 Imports: 
     shiny (>= 1.5.0),
     shiny.semantic (>= 0.4.0),
-    shinyjs (>= 2.0.0)
+    shinyjs (>= 2.0.0),
+    R6 (>= 2.5.0),
+    purrr (>= 0.3.4)
