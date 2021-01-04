@@ -1,7 +1,7 @@
 server = function(input, output, session) {
 
   mixture = Mixture$new()
-  rvs = reactiveValues()
+  store = reactiveValues()
 
   observeEvent(input$add, {
     id = mixture$add(input$distribution)
@@ -22,11 +22,14 @@ server = function(input, output, session) {
     })
 
     observer_2 = observeEvent(rve(), {
-      rvs$rvs = AppHandler({
-        mixture$evaluate("rvs", input, 100)
+      wts = AppHandler({
+        mixture$get_weights(input)
       })
-      rvs$pdf = AppHandler({
-        mixture$evaluate("pdf", input)
+      store$rvs = AppHandler({
+        mixture$mixture_rvs(input, 500, wts)
+      })
+      store$pdf = AppHandler({
+        mixture$mixture_pdf(input, wts)
       })
     }, ignoreInit = TRUE)
 
@@ -39,13 +42,13 @@ server = function(input, output, session) {
   })
 
   output$plot_rvs = shiny::renderPlot({
-    req(rvs$rvs)
-    hist(rvs$rvs)
+    req(store$rvs)
+    hist(store$rvs)
   })
 
   output$plot_pdf = shiny::renderPlot({
-    req(rvs$pdf)
-    plot(rvs$pdf$x, rvs$pdf$pdf, type = "l")
+    req(store$pdf)
+    plot(store$pdf$x, store$pdf$pdf, type = "l")
   })
 
 }

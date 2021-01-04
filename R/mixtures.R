@@ -1,6 +1,11 @@
 # class = FALSE to disable S3 dispatch
 # cloneable = FALSE to save some memory
 
+
+# 'param_list' is going to be the "input" of our Shiny app
+# but it could be any list-like object that can be subsetable by
+# object[["name"]]
+
 Mixture = R6::R6Class(
   "Mixture",
   class = FALSE,
@@ -27,19 +32,9 @@ Mixture = R6::R6Class(
       }
       return(id)
     },
+
     count = function() {
       length(self$components)
-    },
-
-    evaluate = function(type = c("rvs", "pdf"), param_list, size = NULL) {
-      # 'param_list' is going to be the "input" of our Shiny app
-      # but it could be any list-like object that can be subsetable by
-      # object[["name"]]
-      if (type == "rvs") {
-        return(self$mixture_rvs(param_list, size))
-      } else if (type == "pdf") {
-        return(self$mixture_pdf(param_list))
-      }
     },
 
     get_params = function(param_list) {
@@ -68,8 +63,7 @@ Mixture = R6::R6Class(
       }
     },
 
-    mixture_rvs = function(param_list, size) {
-      wts = self$get_weights(param_list)
+    mixture_rvs = function(param_list, size, wts) {
       .l = list(self$get_dists(), self$get_params(param_list), round(wts * size))
       unlist(purrr::pmap(.l, self$component_rvs), use.names = FALSE)
     },
@@ -80,8 +74,7 @@ Mixture = R6::R6Class(
       do.call(.f, .args)
     },
 
-    mixture_pdf = function(param_list) {
-      wts = self$get_weights(param_list)
+    mixture_pdf = function(param_list, wts) {
       dists = self$get_dists()
       params = self$get_params(param_list)
 
