@@ -50,7 +50,21 @@ body = function() {
     style = "margin-left: 260px",
     tags$div(
       class = "ui container",
-      tags$h1(class = "ui header", "First header"),
+      tags$h1(class = "ui header", "Playground to explore sampling distributions"),
+      ui_row(
+        ui_col(
+          width = 4,
+          tags$p("Sample size", class = "card-header"),
+          tags$div(
+            numberInput("number1", value = 20, min = 2, max = 1000)
+          )
+        ),
+        ui_col(
+          width = 4,
+          tags$p("Repetitions", class = "card-header"),
+          numberInput("number2", value = 50, min = 10, step = 10, max = 1000)
+        )
+      ),
       shiny::plotOutput("plot_rvs"),
       shiny::plotOutput("plot_pdf")
     )
@@ -59,14 +73,36 @@ body = function() {
 
 ui = function() {
   shiny.semantic::semanticPage(
+    tags$head(
+      shiny::includeCSS(samp_file("www", "style.css"))
+    ),
     shinyjs::useShinyjs(),
-    # Enable notifications
     shinypop::use_notiflix_notify(
       position = "right-bottom",
       timeout = 5000
     ),
-    tags$head(shiny::includeCSS(samp_file("www", "style.css"))),
     sidebar(),
     body()
+  )
+}
+
+ui_row = function(...) {
+  tags$div(
+    class = "ui grid",
+    tags$div(
+      class = "row",
+      ...
+    )
+  )
+}
+
+ui_col = function(width, ...) {
+  opts = c("one", "two", "three", "four", "five", "six", "seven", "eight",
+            "nine", "ten", "eleven", "twelve", "thirtheen", "fourteen", "fifteen",
+            "sixteen")
+  width = opts[width]
+  tags$div(
+    class = paste(width, "wide column"),
+    ...
   )
 }

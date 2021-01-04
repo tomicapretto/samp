@@ -50,7 +50,6 @@ server = function(input, output, session) {
     req(store$pdf)
     plot(store$pdf$x, store$pdf$pdf, type = "l")
   })
-
 }
 
 

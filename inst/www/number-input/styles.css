@@ -1,0 +1,49 @@
+
+/* Chrome, Safari, Edge, Opera */
+.number-input input::-webkit-outer-spin-button,
+.number-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+/* Firefox
+.number-input input[type=number] {
+  -moz-appearance: textfield;
+}*/
+
+.number-input-controls {
+  display: inline-flex;
+  margin: 2px 0 20px 0;
+}
+
+.number-input-controls input {
+  /*text-align: center;*/
+  font-size: 28px;
+  font-weight: bold;
+  border-width: 0;
+  border: none;
+  /*width:75px;*/
+}
+
+.number-input-controls input:focus {
+  outline: none;
+}
+
+.number-input-controls a {
+  color : #7f8c8d;
+  font-size: 24px;
+}
+
+.number-input-controls a:hover{
+  color: #2980b9;
+  text-decoration: none;
+  outline: none;
+}
+
+.number-input-controls a:focus {
+  color: #2980b9;
+  text-decoration: none;
+  outline: none;
+}
