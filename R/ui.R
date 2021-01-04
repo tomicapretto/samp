@@ -65,8 +65,8 @@ body = function() {
           numberInput("number2", value = 50, min = 10, step = 10, max = 1000)
         )
       ),
-      shiny::plotOutput("plot_rvs"),
-      shiny::plotOutput("plot_pdf")
+      shiny::plotOutput("plot_rvs", height = "340px", width = "85%"),
+      shiny::plotOutput("plot_pdf", height = "340px", width = "85%")
     )
   )
 }
@@ -98,8 +98,8 @@ ui_row = function(...) {
 
 ui_col = function(width, ...) {
   opts = c("one", "two", "three", "four", "five", "six", "seven", "eight",
-            "nine", "ten", "eleven", "twelve", "thirtheen", "fourteen", "fifteen",
-            "sixteen")
+           "nine", "ten", "eleven", "twelve", "thirtheen", "fourteen",
+           "fifteen", "sixteen")
   width = opts[width]
   tags$div(
     class = paste(width, "wide column"),
