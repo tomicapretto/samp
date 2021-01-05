@@ -3,6 +3,14 @@ server = function(input, output, session) {
   mixture = Mixture$new()
   store = reactiveValues()
 
+  observeEvent(input$statistic, {
+    if (input$statistic == "Percentile") {
+      shinyjs::show("percentile_div")
+    } else {
+      shinyjs::hide("percentile_div")
+    }
+  })
+
   observeEvent(input$add, {
     id = mixture$add(input$distribution)
     add_distribution(input$distribution, id)
@@ -43,13 +51,14 @@ server = function(input, output, session) {
 
   output$plot_rvs = shiny::renderPlot({
     req(store$rvs)
-    hist(store$rvs)
+    graphics::hist(store$rvs)
   })
 
   output$plot_pdf = shiny::renderPlot({
     req(store$pdf)
-    plot(store$pdf$x, store$pdf$pdf, type = "l")
+    graphics::plot(store$pdf$x, store$pdf$pdf, type = "l")
   })
 }
 
 
+# TODO: When value is manually placed outside boundaries, move it back to boundary.

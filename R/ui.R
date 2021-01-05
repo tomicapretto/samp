@@ -50,19 +50,34 @@ body = function() {
     style = "margin-left: 260px",
     tags$div(
       class = "ui container",
-      tags$h1(class = "ui header", "Playground to explore sampling distributions"),
+      tags$h1(class = "ui header", "Sampling distributions playground"),
       ui_row(
         ui_col(
           width = 4,
           tags$p("Sample size", class = "card-header"),
           tags$div(
-            numberInput("number1", value = 20, min = 2, max = 1000)
+            numberInput("size", value = 20, min = 2, max = 1000)
           )
         ),
         ui_col(
           width = 4,
           tags$p("Repetitions", class = "card-header"),
-          numberInput("number2", value = 50, min = 10, step = 10, max = 1000)
+          numberInput("repetitions", value = 50, min = 10, max = 1000, step = 10)
+        ),
+        ui_col(
+          width = 4,
+          tags$p("Statistic", class = "card-header"),
+          selectorInput("statistic", c("Mean", "Median", "Minimum", "Maximum", "Percentile"))
+        ),
+        ui_col(
+          width = 4,
+          shinyjs::hidden(
+            tags$div(
+              id = "percentile_div",
+              tags$p("Percentile", class = "card-header"),
+              numberInput("percentile", value = 25, min = 1, max = 99, step = 1)
+            )
+          )
         )
       ),
       shiny::plotOutput("plot_rvs", height = "340px", width = "85%"),

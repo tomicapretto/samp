@@ -6,17 +6,13 @@ numberInput = function(inputId, value = 0, min = NULL, max = NULL, step = 1) {
       class = "number-input-controls",
       tags$input(type = "number", min = min, max = max, value = value, step = step),
       tags$div(
-        tags$a(
+        style = "line-height: 25px; margin-left: auto;",
+        tags$div(
           id = "step-up",
-          href = "#",
-          `data-val` = 0,
           list(shiny::icon("angle-up"), "")
         ),
-        tags$br(),
-        tags$a(
+        tags$div(
           id = "step-down",
-          href = "#",
-          `data-val` = 0,
           list(shiny::icon("angle-down"), "")
         )
       )

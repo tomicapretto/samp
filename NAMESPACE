@@ -2,7 +2,9 @@
 
 export(launch)
 importFrom(shiny,insertUI)
+importFrom(shiny,observe)
 importFrom(shiny,observeEvent)
 importFrom(shiny,reactiveValues)
 importFrom(shiny,removeUI)
+importFrom(shiny,req)
 importFrom(shiny,tags)
