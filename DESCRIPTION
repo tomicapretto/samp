@@ -6,14 +6,16 @@ Authors@R:
            family = "Capretto",
            role = c("aut", "cre"),
            email = "tomicapretto@gmail.com")
-Description: What the package does (one paragraph).
+Description: This package contains a web app written in Shiny that
+    enables users to create arbitrary mixture of probability distributions
+    and explore the sampling distribution of several statistics.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Remotes:
-    github::timelyportfolio/katexR
+    github::timelyportfolio/katexR,
     github::dreamRs/shinypop
 Imports: 
     shiny (>= 1.5.0),
