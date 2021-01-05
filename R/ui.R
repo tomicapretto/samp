@@ -6,7 +6,7 @@ sidebar = function() {
       class = "item",
       tags$p(
         class = "sidebar_header",
-        "Sampling Distributions"
+        "Make your own mix!"
       )
     ),
     tags$div(
