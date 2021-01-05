@@ -11,31 +11,26 @@ sidebar = function() {
     ),
     tags$div(
       class = "item",
-      tags$div(
-        class = "ui grid",
-        tags$div(
-          class = "row",
-          tags$div(
-            class = "fourteen wide column",
-
-            shiny.semantic::selectInput(
-              inputId = "distribution",
-              label = "Select a distribution",
-              choices = c(
-                "Normal" = "norm",
-                "T" = "t",
-                "Gamma" = "gamma",
-                "Beta" = "beta",
-                "Log-normal" = "lnorm",
-                "Uniform" = "unif"
-              )
+      ui_row(
+        ui_col(
+          width = 14,
+          shiny.semantic::selectInput(
+            inputId = "distribution",
+            label = "Select a distribution",
+            choices = c(
+              "Normal" = "norm",
+              "T" = "t",
+              "Gamma" = "gamma",
+              "Beta" = "beta",
+              "Log-normal" = "lnorm",
+              "Uniform" = "unif"
             )
-          ),
-          tags$div(
-            class = "two wide column",
-            style = "top:50%",
-            link_add("add")
           )
+        ),
+        ui_col(
+          width = 2,
+          style = "top:50%",
+          link_add("add")
         )
       )
     ),
@@ -52,6 +47,7 @@ body = function() {
       class = "ui container",
       tags$h1(class = "ui header", "Sampling distributions playground"),
       ui_row(
+        style = "margin-bottom:25px;",
         ui_col(
           width = 4,
           tags$p("Sample size", class = "card-header"),
@@ -62,7 +58,7 @@ body = function() {
         ui_col(
           width = 4,
           tags$p("Repetitions", class = "card-header"),
-          numberInput("repetitions", value = 50, min = 10, max = 1000, step = 10)
+          numberInput("repetitions", value = 200, min = 10, max = 1000, step = 10)
         ),
         ui_col(
           width = 4,
@@ -80,10 +76,9 @@ body = function() {
           )
         )
       ),
-      verbatimTextOutput("text"),
       tags$div(
-        shiny::plotOutput("plot_rvs", height = "340px", width = "85%"),
-        shiny::plotOutput("plot_pdf", height = "340px", width = "85%"),
+        echarts4r::echarts4rOutput("plot_rvs", height = "340px", width = "85%"),
+        echarts4r::echarts4rOutput("plot_pdf", height = "340px", width = "85%"),
         align = "center"
       )
     )
@@ -92,36 +87,10 @@ body = function() {
 
 ui = function() {
   shiny.semantic::semanticPage(
-    tags$head(
-      shiny::includeCSS(samp_file("www", "style.css"))
-    ),
+    tags$head(shiny::includeCSS(samp_file("www", "style.css"))),
     shinyjs::useShinyjs(),
-    shinypop::use_notiflix_notify(
-      position = "right-bottom",
-      timeout = 5000
-    ),
+    shinypop::use_notiflix_notify("right-bottom", 5000),
     sidebar(),
     body()
-  )
-}
-
-ui_row = function(...) {
-  tags$div(
-    class = "ui grid",
-    tags$div(
-      class = "row",
-      ...
-    )
-  )
-}
-
-ui_col = function(width, ...) {
-  opts = c("one", "two", "three", "four", "five", "six", "seven", "eight",
-           "nine", "ten", "eleven", "twelve", "thirtheen", "fourteen",
-           "fifteen", "sixteen")
-  width = opts[width]
-  tags$div(
-    class = paste(width, "wide column"),
-    ...
   )
 }
