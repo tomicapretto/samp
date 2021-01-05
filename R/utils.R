@@ -14,7 +14,7 @@ stop2 = function(message, call = NULL, ...) {
   stop(err)
 }
 
-AppHandler = function(expr) {
+appHandler = function(expr) {
   tryCatch({
     expr
   },

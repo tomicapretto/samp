@@ -22,6 +22,7 @@ Mixture = R6::R6Class(
     remove = function(id) {
       self$components[[id]] = NULL
     },
+
     new_id = function() {
       ids = as.numeric(names(self$components))
       ids_seq = seq(length(self$components))
@@ -51,9 +52,7 @@ Mixture = R6::R6Class(
     get_weights = function(param_list) {
       wts = vapply(
         self$components,
-        function(x) {
-          param_list[[paste0("weight_", x$id)]]
-        },
+        function(x) param_list[[paste0("weight_", x$id)]],
         numeric(1)
       )
       if (sum(wts) >= 0.99 && sum(wts) <= 1.01) {
@@ -63,9 +62,12 @@ Mixture = R6::R6Class(
       }
     },
 
-    mixture_rvs = function(param_list, size, wts) {
+    mixture_rvs = function(param_list, wts, size, reps) {
       .l = list(self$get_dists(), self$get_params(param_list), round(wts * size))
-      unlist(purrr::pmap(.l, self$component_rvs), use.names = FALSE)
+      .f = function(x) {
+        unlist(purrr::pmap(.l, self$component_rvs), use.names = FALSE)
+      }
+      replicate(reps, .f(), simplify = FALSE)
     },
 
     component_rvs = function(distribution, params, size) {

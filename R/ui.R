@@ -80,6 +80,7 @@ body = function() {
           )
         )
       ),
+      verbatimTextOutput("text"),
       tags$div(
         shiny::plotOutput("plot_rvs", height = "340px", width = "85%"),
         shiny::plotOutput("plot_pdf", height = "340px", width = "85%"),

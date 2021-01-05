@@ -11,6 +11,10 @@ server = function(input, output, session) {
     }
   })
 
+  output$text = renderText({
+    paste(input$size, input$repetitions, input$statistic, input$percentile)
+  })
+
   observeEvent(input$add, {
     id = mixture$add(input$distribution)
     add_distribution(input$distribution, id)
