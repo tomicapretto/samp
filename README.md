@@ -20,6 +20,8 @@ This is a simple demonstration of how you can use the app.
 <img src="inst/www/samp.gif">
 
 
+You can also see a live version of the app [here](https://tomicapretto.shinyapps.io/samp/).
+
 ## Basic usage
 
 The objective of this application is to enable people to explore sampling
