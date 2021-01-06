@@ -89,7 +89,6 @@ ui = function() {
   shiny.semantic::semanticPage(
     tags$head(shiny::includeCSS(samp_file("www", "style.css"))),
     shinyjs::useShinyjs(),
-    shinypop::use_notiflix_notify("right-bottom", 5000),
     sidebar(),
     body()
   )

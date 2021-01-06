@@ -36,7 +36,17 @@ server = function(input, output, session) {
         reactive_inputs()), {
       appHandler({
         wts = appHandler(mixture$get_weights(input))
-        req(wts)
+        if (sum(wts) != 1) {
+          shiny::showNotification(
+            "Weights must add up to 1.",
+            duration = NULL,
+            type = "error",
+            id = "weight_noti"
+          )
+          req(FALSE)
+        } else {
+          shiny::removeNotification("weight_noti")
+        }
         store$rvs_list = mixture$mixture_rvs(input, wts, input$size, input$repetitions)
         store$pdf = mixture$mixture_pdf(input, wts)
       })

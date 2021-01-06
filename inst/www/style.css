@@ -71,5 +71,18 @@
   margin-bottom: 0px;
 }
 
+/*Override default*/
+.shiny-notification-error {
+    color: #fff;
+    background-color: #ff5549;
+    border: 1px solid #ebccd1;
+}
 
+#shiny-notification-panel {
+    bottom: 2%;
+    right: 1%;
+}
 
+.shiny-notification-close {
+    color: #fff;
+}

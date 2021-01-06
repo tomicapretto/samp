@@ -55,11 +55,7 @@ Mixture = R6::R6Class(
         function(x) param_list[[paste0("weight_", x$id)]],
         numeric(1)
       )
-      if (sum(wts) >= 0.99 && sum(wts) <= 1.01) {
-        return(wts)
-      } else {
-        stop2("Weights must add up to 1.")
-      }
+      wts
     },
 
     mixture_rvs = function(param_list, wts, size, reps) {

@@ -20,9 +20,9 @@ appHandler = function(expr) {
   },
   shiny.silent.error = function(cnd) NULL,
   samp.error = function(cnd) {
-    shinypop::nx_notify_error(cnd$message)
+    shiny::showNotification(cnd$message, type = "error")
   },
   error = function(cnd) {
-    shinypop::nx_notify_error("Unexpected error ocurred.")
+    shiny::showNotification("Unexpected error ocurred.", type = "error")
   })
 }

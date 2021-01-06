@@ -15,13 +15,11 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Remotes:
-    github::timelyportfolio/katexR,
-    github::dreamRs/shinypop
+    github::timelyportfolio/katexR
 Imports: 
     shiny (>= 1.5.0),
     shiny.semantic (>= 0.4.0),
     shinyjs (>= 2.0.0),
-    shinypop (>= 0.0.1.930),
     R6 (>= 2.5.0),
     purrr (>= 0.3.4),
     katexR (>= 0.1),
