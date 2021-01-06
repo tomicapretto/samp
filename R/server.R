@@ -31,12 +31,7 @@ server = function(input, output, session) {
       millis = 500
     )
 
-    # Update weight label
-    observer_1 = observe({
-      shinyjs::html(paste0("weight_value_", id), input[[paste0("weight_", id)]])
-    })
-
-    observer_2 = observeEvent(
+    observer = observeEvent(
       c(reactive_params(),
         reactive_inputs()), {
       appHandler({
@@ -50,8 +45,7 @@ server = function(input, output, session) {
     observeEvent(input[[paste0("remove_", id)]], {
       removeUI(paste0("#", paste0("div_", id)))
       mixture$remove(id)
-      observer_1$destroy()
-      observer_2$destroy()
+      observer$destroy()
     }, ignoreInit = TRUE)
   })
 
@@ -76,6 +70,5 @@ server = function(input, output, session) {
   })
 
 }
-
 
 # TODO: When value is manually placed outside boundaries, move it back to boundary.

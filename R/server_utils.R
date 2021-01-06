@@ -33,14 +33,9 @@ distribution_params = function(distribution, id) {
         class = "row",
         tags$div(
           class = "fourteen wide column",
-          tags$p(
-            style = "margin-bottom:-5px",
-            "Weight: ",
-            tags$span(id = paste0("weight_value_", id), style = "font-weight: bold;")
-          ),
-          shiny.semantic::sliderInput(
+          tags$p("Weight"),
+          rangeInput(
             inputId = paste0("weight_", id),
-            label = NULL,
             min = 0,
             max = 1,
             value = 0.5,
